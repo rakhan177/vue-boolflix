@@ -30,6 +30,6 @@ main{
   background-color: #000;
   margin: 0 15px 20px 15px;
 }
-.scheda img{
+.scheda > img{
   width: 100%;
 }
