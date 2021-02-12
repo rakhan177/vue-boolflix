@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>BOOLFLIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="root" class="container">
+
+      <header>
+        <nav>
+          <div>
+            <div class="boolflix">
+              <span class="uno">B</span><span class="due">O</span><span class="tre">O</span><span class="quattro">L</span><span class="quattro">F</span><span class="tre">L</span><span class="due">I</span><span class="uno">X</span>
+            </div>
+            <div>
+              Film
+            </div>
+            <div>
+              Serie TV
+            </div>
+            <div>
+              Genere
+            </div>
+          </div>
+
+          <div>
+            <input type="text" placeholder="Cerca un film" v-model="ricerca" @keyup.enter="cerca()">
+            <button type="button" name="button" @click="cerca()">CERCA</button>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <div class="films" v-if="arrayFilm.length !== 0">
+          <h2>Film</h2>
+        </div>
+        <div class="elenco-film" v-if="arrayFilm.length !== 0">
+          <div class="scheda" v-for="film in arrayFilm">
+
+            <img :src="imageFilm(film)" alt="image">
+            <div class="descrizione">
+              <div class="titolo">
+                <span class="elem">Titolo:</span>
+                <span class="elem-desc">{{film.title}}</span>
+              </div>
+              <div class="titolo-originale" v-if="hideTitle(film)">
+                <span class="elem">Titolo originale</span>
+                <span class="elem-desc">{{film.original_title}}</span>
+              </div>
+              <div class="lingua">
+                <span class="elem">Lingua</span>
+                <span><img :src="getFlag(film)" v-if="getFlag(film) !== film.original_language"></span>
+                <span class="elem-desc" v-if="getFlag(film) === film.original_language">{{film.original_language}}</span>
+              </div>
+              <div class="voto">
+                <span class="elem">Voto</span>
+                <span ><i class="fas fa-star" v-for="star in calcStars(film)"></i><i class="far fa-star" v-for="star in (5 - calcStars(film))"></i></span>
+              </div>
+              <div class="attori">
+                <span class="elem">Attori</span>
+                <span class="elem-desc" v-for="attori in film.attori">{{attori}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="films" v-if="arraySerie.length !== 0">
+          <h2>Serie TV</h2>
+        </div>
+        <div class="elenco-film" v-if="arraySerie.length !== 0">
+          <div class="scheda" v-for="serie in arraySerie">
+
+            <img :src="imageFilm(serie)" alt="image">
+            <div class="descrizione">
+              <div class="titolo">
+                <span class="elem">Titolo:</span>
+                <span class="elem-desc">{{serie.title}}</span>
+              </div>
+              <div class="titolo-originale" v-if="hideTitle(serie)">
+                <span class="elem">Titolo originale</span>
+                <span class="elem-desc">{{serie.original_title}}</span>
+              </div>
+              <div class="lingua">
+                <span class="elem">Lingua</span>
+                <span><img :src="getFlag(serie)" v-if="getFlag(serie) !== serie.original_language"></span>
+                <span class="elem-desc" v-if="getFlag(serie) === serie.original_language">{{serie.original_language}}</span>
+              </div>
+              <div class="voto">
+                <span class="elem">Voto</span>
+                <span ><i class="fas fa-star" v-for="star in calcStars(serie)"></i><i class="far fa-star" v-for="star in (5 - calcStars(serie))"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </main>
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="js/script.js" charset="utf-8"></script>
+  </body>
+</html>

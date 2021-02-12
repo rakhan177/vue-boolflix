@@ -3,15 +3,42 @@ const app = new Vue({
   data: {
     ricerca: '',
     arrayFilm: [],
+    arraySerie: [],
+    arrayGenreFilm: [],
+    arrayGenreSerie: [],
+  },
+  mounted() {
+    let quel = this;
+    axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=3c14d83cf078d59749d2c36b16a2a734')
+    .then(function(resp){
+      quel.arrayGenreFilm = resp.data.genres;
+      console.log(quel.arrayGenreFilm)
+    })
+    axios.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3c14d83cf078d59749d2c36b16a2a734')
+    .then(function(resp) {
+      quel.arrayGenreSerie = resp.data.genres;
+      console.log(quel.arrayGenreSerie)
+    })
   },
   methods: {
+    cerca: function(){
+      this.controlSearch();
+      this.cercaFilm();
+      this.cercaSerie();
+    },
     cercaFilm: function(){
-      this.controlSearch()
       let quel = this;
       axios.get('https://api.themoviedb.org/3/search/movie?api_key=3c14d83cf078d59749d2c36b16a2a734&query=' + quel.ricerca)
       .then(function(resp){
         quel.arrayFilm = resp.data.results;
-        console.log(quel.arrayFilm)
+      })
+    },
+    cercaSerie: function(){
+      let quel = this;
+      axios.get('https://api.themoviedb.org/3/search/tv?api_key=3c14d83cf078d59749d2c36b16a2a734&query=' + quel.ricerca)
+      
+      .then(function(resp){
+        quel.arraySerie = resp.data.results;
       })
     },
     controlSearch: function(){
@@ -38,25 +65,32 @@ const app = new Vue({
       let lingua = el.original_language;
       switch(lingua){
         case 'en':
-          lingua='gb';
+          lingua ='gb';
           break;
         case 'cs':
-          lingua='cz';
+          lingua ='cz';
           break;
         case 'da':
-          lingua='dk';
+          lingua ='dk';
           break;
         case 'ja':
-          lingua='jp';
+          lingua ='jp';
           break;
         case 'zh':
-          lingua='cn';
+          lingua ='cn';
           break;
         case 'ur':
-          lingua='pk';
+          lingua ='pk';
+          break;
+        default:
+          lingua;
           break;
       }
-      return 'https://flagcdn.com/16x12/' + lingua + '.png';
+      if(lingua === el.original_language){
+        return lingua
+      }else{
+        return 'https://flagcdn.com/16x12/' + lingua + '.png';
+      }
     },
     hideTitle: function(el){
       if(el.title === el.original_title){

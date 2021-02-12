@@ -1,0 +1,107 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+.container{
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: #141414;
+  color: #FFF;
+}
+nav{
+  width: 100%;
+  height: 100px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav > div:first-of-type{
+  display: flex;
+  align-items: center;
+}
+nav > div:first-of-type > *{
+  padding-right: 15px;
+}
+.boolflix{
+  color: red;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.boolflix > .uno{
+  font-size: 35px;
+}
+.boolflix > .due{
+  font-size: 30px;
+}
+.boolflix > .tre{
+  font-size: 25px;
+}
+.boolflix > .quattro{
+  font-size: 20px;
+}
+nav button{
+  color: #fff;
+  background-color: #141414;
+  border:  1px solid #fff;
+  padding: 8px;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+nav input{
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  outline: none;
+}
+main{
+  padding-left: 30px;
+}
+.films{
+  padding: 15px 0;
+}
+.elenco-film{
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+.scheda{
+  height: 280px;
+  padding: 10px 0;
+  margin-right: 5px;
+  border-radius: 10px;
+  position: relative;
+}
+.scheda > img{
+  height: 100%;
+  width: 200px;
+  max-height: 100%;
+  border-radius: 10px;
+}
+.descrizione{
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 5px;
+}
+.scheda:hover .descrizione{
+  display: block;
+}
+.scheda:hover > img{
+  opacity: 0.1;
+}
+.elem{
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+.elem-desc{
+  color: lightgray;
+  font-size: 15px;
+}

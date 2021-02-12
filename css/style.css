@@ -22,13 +22,20 @@ nav{
 main{
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   padding-top: 30px;
 }
+.films{
+  /* height: 200px; */
+  /* display: flex; */
+  /* flex-wrap: nowrap; */
+  overflow-x: scroll;
+}
 .scheda{
-  width: calc((100% / 5) - 30px);
+  width: 200px;
   background-color: #000;
-  margin: 0 15px 20px 15px;
+  margin: 0 4px 20px 4px;
+  /* overflow-y: auto; */
 }
 .scheda > img{
   width: 100%;

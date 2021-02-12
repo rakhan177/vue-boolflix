@@ -14,32 +14,36 @@
   <body>
     <div id="root" class="container">
       <nav>
-        <input type="text" placeholder="Cerca un film" v-model="ricerca" @keyup.enter="callAxios()">
-        <button type="button" name="button" @click="callAxios()">CERCA</button>
+        <input type="text" placeholder="Cerca un film" v-model="ricerca" @keyup.enter="cercaFilm()">
+        <button type="button" name="button" @click="cercaFilm()">CERCA</button>
       </nav>
       <main>
 
-        <div class="scheda" v-for="film in arrayFilm">
+        <div class="films">
+          <!-- <h2>Film</h2> -->
+          <div class="scheda" v-for="film in arrayFilm">
 
-          <img :src="imageFilm(film)" alt="image">
-          <div class="titolo">
-            <span>Titolo</span>
-            <span>{{film.title}}</span>
-          </div>
-          <div class="titolo-originale" v-if="hideTitle(film)">
-            <span>Titolo originale</span>
-            <span>{{film.original_title}}</span>
-          </div>
-          <div class="lingua">
-            <span>Lingua</span>
-            <span><img :src="getFlag(film)"></span>
-          </div>
-          <div class="voto">
-            <span>Voto</span>
-            <span ><i class="fas fa-star" v-for="star in calcStars(film)"></i><i class="far fa-star" v-for="star in (5 - calcStars(film))"></i></span>
-          </div>
+            <img :src="imageFilm(film)" alt="image">
+            <div class="titolo">
+              <span>Titolo</span>
+              <span>{{film.title}}</span>
+            </div>
+            <div class="titolo-originale" v-if="hideTitle(film)">
+              <span>Titolo originale</span>
+              <span>{{film.original_title}}</span>
+            </div>
+            <div class="lingua">
+              <span>Lingua</span>
+              <span><img :src="getFlag(film)"></span>
+            </div>
+            <div class="voto">
+              <span>Voto</span>
+              <span ><i class="fas fa-star" v-for="star in calcStars(film)"></i><i class="far fa-star" v-for="star in (5 - calcStars(film))"></i></span>
+            </div>
 
+          </div>
         </div>
+
 
       </main>
 

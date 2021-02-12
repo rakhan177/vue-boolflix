@@ -3,6 +3,8 @@ const app = new Vue({
   data: {
     ricerca: '',
     arrayFilm: [],
+    arraySerie: [],
+    arrayGenre: [],
   },
   methods: {
     cercaFilm: function(){
@@ -38,25 +40,32 @@ const app = new Vue({
       let lingua = el.original_language;
       switch(lingua){
         case 'en':
-          lingua='gb';
+          lingua ='gb';
           break;
         case 'cs':
-          lingua='cz';
+          lingua ='cz';
           break;
         case 'da':
-          lingua='dk';
+          lingua ='dk';
           break;
         case 'ja':
-          lingua='jp';
+          lingua ='jp';
           break;
         case 'zh':
-          lingua='cn';
+          lingua ='cn';
           break;
         case 'ur':
-          lingua='pk';
+          lingua ='pk';
+          break;
+        default:
+          lingua;
           break;
       }
-      return 'https://flagcdn.com/16x12/' + lingua + '.png';
+      if(lingua === el.original_language){
+        return lingua
+      }else{
+        return 'https://flagcdn.com/16x12/' + lingua + '.png';
+      }
     },
     hideTitle: function(el){
       if(el.title === el.original_title){
