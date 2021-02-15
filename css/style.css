@@ -8,35 +8,124 @@
   width: 100vw;
   max-width: 100%;
   min-height: 100vh;
-  background-color: darkblue;
-  color: #fff;
+  background-color: #141414;
+  color: #FFF;
 }
 nav{
-  height: 100px;
   width: 100%;
-  background-color: #000;
+  height: 100px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #141414;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+nav > div:first-of-type{
+  display: flex;
   align-items: center;
 }
-main{
-  width: 100%;
+nav > div:first-of-type > *{
+  padding-right: 15px;
+}
+.boolflix{
+  color: red;
+  font-weight: bold;
   display: flex;
-  /* flex-wrap: wrap; */
-  padding-top: 30px;
+  align-items: center;
+}
+.boolflix > .uno{
+  font-size: 50px;
+}
+.boolflix > .due{
+  font-size: 45px;
+}
+.boolflix > .tre{
+  font-size: 40px;
+}
+.boolflix > .quattro{
+  font-size: 35px;
+}
+.pointer{
+  cursor: pointer;
+}
+nav button{
+  color: #fff;
+  background-color: #141414;
+  border:  1px solid #fff;
+  padding: 8px;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+nav input{
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  outline: none;
+}
+nav .genere{
+  position: relative;
+}
+nav .genere:hover .generi{
+  display: block;
+}
+.genere .generi{
+  border: 1px solid #fff;
+  height: 300px;
+  overflow-y: scroll;
+  position: absolute;
+  display: none;
+  padding: 5px;
+  background-color: #141414;
+  border-radius: 5px;
+  z-index: 10;
+}
+.generi li{
+  list-style: none;
+}
+main{
+  padding-left: 30px;
 }
 .films{
-  /* height: 200px; */
-  /* display: flex; */
-  /* flex-wrap: nowrap; */
+  padding: 15px 0;
+}
+.elenco-film{
+  width: 100%;
+  display: flex;
   overflow-x: scroll;
 }
 .scheda{
-  width: 200px;
-  background-color: #000;
-  margin: 0 4px 20px 4px;
-  /* overflow-y: auto; */
+  height: 280px;
+  padding: 10px 0;
+  margin-right: 5px;
+  border-radius: 5px;
+  position: relative;
 }
 .scheda > img{
-  width: 100%;
+  height: 100%;
+  width: 200px;
+  max-height: 100%;
+  border-radius: 10px;
+}
+.descrizione{
+  display: none;
+  /* padding-right: 5px; */
+  position: absolute;
+  top: 15px;
+  left: 5px;
+}
+.scheda:hover .descrizione{
+  display: block;
+}
+.scheda:hover > img{
+  opacity: 0.1;
+}
+.elem{
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+.elem-desc{
+  color: lightgray;
+  font-size: 15px;
 }

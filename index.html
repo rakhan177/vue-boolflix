@@ -13,34 +13,110 @@
   </head>
   <body>
     <div id="root" class="container">
-      <nav>
-        <input type="text" placeholder="Cerca un film" v-model="ricerca" @keyup.enter="cercaFilm()">
-        <button type="button" name="button" @click="cercaFilm()">CERCA</button>
-      </nav>
-      <main>
 
-        <div class="films">
-          <!-- <h2>Film</h2> -->
-          <div class="scheda" v-for="film in arrayFilm">
+      <header>
+        <nav>
+          <div>
+            <div class="boolflix">
+              <span class="uno">B</span><span class="due">O</span><span class="tre">O</span><span class="quattro">L</span><span class="quattro">F</span><span class="tre">L</span><span class="due">I</span><span class="uno">X</span>
+            </div>
+            <div @click="hideSerie" class="pointer">
+              Film
+            </div>
+            <div @click="hideFilm" class="pointer">
+              Serie TV
+            </div>
+            <div class="genere pointer">
+              Genere
+              <div class="generi pointer">
+                <ul>
+                  <li class="pointer">ALL</li>
+                  <li class="pointer" @click="selectGenere(generi.id)" v-for="generi in mixedGenre(arrayGenreFilm, arrayGenreSerie, arrayGeneri)" @click="selezionaGenere(generi)">{{generi.name}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <input type="text" placeholder="Cerca un film" v-model="ricerca" @keyup.enter="cerca()">
+            <button type="button" name="button" @click="cerca()" class="pointer">CERCA</button>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <div class="films" v-if="arrayFilm.length !== 0 && hideF === true">
+          <h2>Film</h2>
+        </div>
+        <div class="elenco-film" v-if="arrayFilm.length !== 0 && hideF === true">
+          <div class="scheda pointer" v-for="film in arrayFilm" v-if="film.genre_ids.includes(selectedGenere) || selectedGenere === ''">
 
             <img :src="imageFilm(film)" alt="image">
-            <div class="titolo">
-              <span>Titolo</span>
-              <span>{{film.title}}</span>
+            <div class="descrizione">
+              <div class="titolo">
+                <span class="elem">Titolo:</span>
+                <span class="elem-desc">{{film.title}}</span>
+              </div>
+              <div class="titolo-originale" v-if="hideTitle(film)">
+                <span class="elem">Titolo originale:</span>
+                <span class="elem-desc">{{film.original_title}}</span>
+              </div>
+              <div class="lingua">
+                <span class="elem">Lingua:</span>
+                <span><img :src="getFlag(film)" v-if="getFlag(film) !== film.original_language"></span>
+                <span class="elem-desc" v-if="getFlag(film) === film.original_language">{{film.original_language}}</span>
+              </div>
+              <div class="voto">
+                <span class="elem">Voto:</span>
+                <span ><i class="fas fa-star" v-for="star in calcStars(film)"></i><i class="far fa-star" v-for="star in (5 - calcStars(film))"></i></span>
+              </div>
+              <div class="genere">
+                <span class="elem">Genere:</span>
+                <span class="elem-desc">{{assegnaGenre(film, arrayGenreFilm)}}</span>
+              </div>
+              <div class="attori">
+                <span class="elem">Attori</span>
+                <span class="elem-desc" v-for="attori in film.attori">{{attori}}; </span>
+              </div>
             </div>
-            <div class="titolo-originale" v-if="hideTitle(film)">
-              <span>Titolo originale</span>
-              <span>{{film.original_title}}</span>
-            </div>
-            <div class="lingua">
-              <span>Lingua</span>
-              <span><img :src="getFlag(film)"></span>
-            </div>
-            <div class="voto">
-              <span>Voto</span>
-              <span ><i class="fas fa-star" v-for="star in calcStars(film)"></i><i class="far fa-star" v-for="star in (5 - calcStars(film))"></i></span>
-            </div>
+          </div>
+        </div>
 
+
+        <div class="films" v-if="arraySerie.length !== 0 && hideS === true">
+          <h2>Serie TV</h2>
+        </div>
+        <div class="elenco-film" v-if="arraySerie.length !== 0 && hideS === true">
+          <div class="scheda pointer" v-for="serie in arraySerie">
+
+            <img :src="imageFilm(serie)" alt="image">
+            <div class="descrizione">
+              <div class="titolo">
+                <span class="elem">Titolo:</span>
+                <span class="elem-desc">{{serie.title}}</span>
+              </div>
+              <div class="titolo-originale" v-if="hideTitle(serie)">
+                <span class="elem">Titolo originale</span>
+                <span class="elem-desc">{{serie.original_title}}</span>
+              </div>
+              <div class="lingua">
+                <span class="elem">Lingua</span>
+                <span><img :src="getFlag(serie)" v-if="getFlag(serie) !== serie.original_language"></span>
+                <span class="elem-desc" v-if="getFlag(serie) === serie.original_language">{{serie.original_language}}</span>
+              </div>
+              <div class="voto">
+                <span class="elem">Voto</span>
+                <span ><i class="fas fa-star" v-for="star in calcStars(serie)"></i><i class="far fa-star" v-for="star in (5 - calcStars(serie))"></i></span>
+              </div>
+              <div class="genere">
+                <span class="elem">Genere:</span>
+                <span class="elem-desc">{{assegnaGenre(serie, arrayGenreSerie)}}</span>
+              </div>
+              <div class="attori">
+                <span class="elem">Attori</span>
+                <span class="elem-desc" v-for="attori in serie.attori">{{attori}}; </span>
+              </div>
+            </div>
           </div>
         </div>
 
