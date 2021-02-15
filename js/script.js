@@ -11,7 +11,7 @@ const app = new Vue({
     arrayAttoriFilm: [],
     hideF: true,
     hideS: true,
-    selectedGenere: '',
+    genere: '',
   },
   mounted() {
     let quel = this;
@@ -153,37 +153,21 @@ const app = new Vue({
       }
     },
     selezionaGenere: function(genere){
-      console.log(genere.name)
+      this.genere = genere;
     },
     mixedGenre: function(arr1, arr2, arr3){
-//       for(let x = 0; x < arr1.length; x++){
-//         if(!arr3.includes(arr1[x])){
-//           arr3.push(arr1[x])
-//         }
-//       }
-//       for(let y = 0; y < arr2.length; y++){
-//         if(!arr3.includes(arr2[y])){
-//           arr3.push(arr2[y])
-//         }
-//       }
-//       return arr3
-//       // arr3 = [...arr1, ...arr2];
-//       // let filterGenre = [];
-//       // return arr3.filter(function(value, index, self) {
-//       //   return self.indexOf(value) === index;
-//       //       });
-// // let arrayUnique = function(arr) {
-// //     return arr.filter(function(value, index, self) {
-// //         return self.indexOf(value) === index;
-// //     });
-// // };
-      return arr3 = [...arr1, ...arr2];
+      arr3 = [...arr1, ...arr2];
+      let arr4 = [];
+      for(let x = 0; x < arr3.length; x++){
+        let doppione = arr4.filter((item, i) => {
+          return item.name === arr3[x].name
+        })
+        if(!doppione[0]){
+          arr4.push(arr3[x])
+        }
+      }
+      return arr4
     },
-
-    selectGenere: function(id) {
-      this.selectedGenere = id
-    },
-
     assegnaGenre: function(film, arr1){
       let arr = [];
       film.genre_ids.forEach((item, i) => {

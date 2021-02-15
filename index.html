@@ -31,7 +31,7 @@
               <div class="generi pointer">
                 <ul>
                   <li class="pointer">ALL</li>
-                  <li class="pointer" @click="selectGenere(generi.id)" v-for="generi in mixedGenre(arrayGenreFilm, arrayGenreSerie, arrayGeneri)" @click="selezionaGenere(generi)">{{generi.name}}</li>
+                  <li class="pointer" v-for="generi in mixedGenre(arrayGenreFilm, arrayGenreSerie, arrayGeneri)" @click="selezionaGenere(generi.id)">{{generi.name}}</li>
                 </ul>
               </div>
             </div>
@@ -49,7 +49,7 @@
           <h2>Film</h2>
         </div>
         <div class="elenco-film" v-if="arrayFilm.length !== 0 && hideF === true">
-          <div class="scheda pointer" v-for="film in arrayFilm" v-if="film.genre_ids.includes(selectedGenere) || selectedGenere === ''">
+          <div class="scheda pointer" v-for="film in arrayFilm" v-if="film.genre_ids.includes(genere) || genere === ''">
 
             <img :src="imageFilm(film)" alt="image">
             <div class="descrizione">
