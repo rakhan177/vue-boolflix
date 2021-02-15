@@ -155,6 +155,9 @@ const app = new Vue({
     selezionaGenere: function(genere){
       this.genere = genere;
     },
+    azzeraGeneri: function(){
+      this.genere = '';
+    },
     mixedGenre: function(arr1, arr2, arr3){
       arr3 = [...arr1, ...arr2];
       let arr4 = [];
